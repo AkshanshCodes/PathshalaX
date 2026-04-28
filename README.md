@@ -1,0 +1,1 @@
+PathshalaX is a gamified learning platform designed to improve STEM education for students in grades 6–12, especially in low-connectivity rural areas. It transforms traditional learning into an engaging, game-like experience using quizzes, rewards, and progress tracking.
