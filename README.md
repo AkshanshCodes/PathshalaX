@@ -1,16 +1,31 @@
-# React + Vite
+🚀 PathshalaX
+Simple Learning Beyond Barriers
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PathshalaX is a modern LMS-inspired educational platform designed to provide a clean, accessible, and structured learning experience for students.
 
-Currently, two official plugins are available:
+The platform focuses on:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+📚 Course-based learning
+❓ Interactive quizzes
+🔊 Accessibility features
+📱 Responsive design
+🌍 Simple and user-friendly navigation
 
-## React Compiler
+Built with a modern dashboard-style UI inspired by contemporary learning platforms.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✨ Features
+Modern LMS dashboard
+Course & lesson management UI
+Subject-wise quiz system
+English & Hindi audio support
+Translation support
+Progress tracking
+Responsive mobile-first design
+🛠️ Tech Stack
+React
+Tailwind CSS
+React Router DOM
+Lucide React Icons
+LibreTranslate API
+Open Library API
+SpeechSynthesis API
