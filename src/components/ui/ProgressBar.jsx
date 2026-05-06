@@ -1,8 +1,12 @@
+import TranslatedText from '../TranslatedText'
+
 function ProgressBar({ label, value }) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between gap-3 text-sm">
-        <span className="font-medium text-muted">{label}</span>
+        <span className="font-medium text-muted">
+          <TranslatedText text={label} />
+        </span>
         <span className="font-semibold text-ink">{value}%</span>
       </div>
       <div

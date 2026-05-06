@@ -1,3 +1,5 @@
+import TranslatedText from './TranslatedText'
+
 function NotesRenderer({ notes }) {
   return (
     <div className="space-y-4">
@@ -5,7 +7,7 @@ function NotesRenderer({ notes }) {
         if (note.type === 'heading') {
           return (
             <h3 className="text-lg font-semibold tracking-tight text-ink" key={`${note.type}-${index}`}>
-              {note.text}
+              <TranslatedText text={note.text} />
             </h3>
           )
         }
@@ -13,7 +15,7 @@ function NotesRenderer({ notes }) {
         if (note.type === 'paragraph') {
           return (
             <p className="leading-7 text-muted" key={`${note.type}-${index}`}>
-              {note.text}
+              <TranslatedText text={note.text} />
             </p>
           )
         }
@@ -23,7 +25,7 @@ function NotesRenderer({ notes }) {
             <ul className="space-y-2 pl-5 text-muted" key={`${note.type}-${index}`}>
               {note.items.map((item) => (
                 <li className="list-disc leading-7" key={item}>
-                  {item}
+                  <TranslatedText text={item} />
                 </li>
               ))}
             </ul>
@@ -36,8 +38,12 @@ function NotesRenderer({ notes }) {
               className="rounded-2xl bg-palette-green/45 px-4 py-3 text-sm leading-7 text-ink"
               key={`${note.type}-${index}`}
             >
-              <p className="font-semibold">{note.label}</p>
-              <p>{note.text}</p>
+              <p className="font-semibold">
+                <TranslatedText text={note.label} />
+              </p>
+              <p>
+                <TranslatedText text={note.text} />
+              </p>
             </div>
           )
         }
@@ -50,7 +56,7 @@ function NotesRenderer({ notes }) {
                   className="rounded-full bg-palette-blue/55 px-3 py-1 text-sm font-semibold text-ink"
                   key={item}
                 >
-                  {item}
+                  <TranslatedText text={item} />
                 </span>
               ))}
             </div>

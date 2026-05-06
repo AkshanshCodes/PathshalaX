@@ -1,4 +1,4 @@
-import { Calculator, Globe2, Languages, Microscope } from 'lucide-react'
+import { Calculator, Globe2, Languages, Microscope, Monitor, WalletCards } from 'lucide-react'
 
 const createQuestion = (prompt, options, correctAnswer, explanation) => ({
   prompt,
@@ -189,6 +189,46 @@ export const quizSubjects = [
         createQuestion('Why is listening part of respectful communication?', ['It shows the other person matters', 'It makes questions unnecessary', 'It shortens every conversation', 'It removes context'], 'It shows the other person matters', 'Listening is part of showing respect and understanding.'),
         createQuestion('Which statement is most balanced?', ['Customs can differ for many good reasons', 'Only one custom is correct', 'All communities are exactly alike', 'Place never matters'], 'Customs can differ for many good reasons', 'A balanced view allows for difference and meaning.'),
         createQuestion('What is a strong final review question in culture study?', ['What did I learn, and why does it matter?', 'Which answer was fastest?', 'How many letters were there?', 'Can I skip the reflection?'], 'What did I learn, and why does it matter?', 'Reflection helps you keep the most useful ideas from the lesson.'),
+      ]),
+    ],
+  },
+  {
+    id: 'computer-basics',
+    title: 'Computer Basics',
+    description: 'Practice computer parts, typing habits, and safe internet choices.',
+    icon: Monitor,
+    quizzes: [
+      createQuiz('computer-starter', 'Computer Starter', 'Check simple computer and internet safety ideas.', 'Easy', [
+        createQuestion('Which part shows words and pictures?', ['Screen', 'Keyboard', 'Mouse', 'Bag'], 'Screen', 'The screen shows what is happening on the computer.'),
+        createQuestion('Which part helps you type letters?', ['Keyboard', 'Screen', 'Bottle', 'Chair'], 'Keyboard', 'The keyboard has keys for typing.'),
+        createQuestion('What is best when learning to type?', ['Type slowly and correctly', 'Press random keys', 'Rush every word', 'Close your eyes'], 'Type slowly and correctly', 'Slow practice helps your fingers learn the keys.'),
+        createQuestion('What should you do with your password?', ['Keep it private', 'Share it with strangers', 'Post it online', 'Say it loudly'], 'Keep it private', 'A password protects your account.'),
+        createQuestion('What should you do before sharing personal details online?', ['Ask a trusted adult', 'Share quickly', 'Ignore safety', 'Click every link'], 'Ask a trusted adult', 'It is safer to ask before sharing personal information.'),
+        createQuestion('Which action uses the mouse or touchpad?', ['Clicking a button', 'Showing a movie', 'Making sound louder', 'Charging the laptop'], 'Clicking a button', 'The mouse or touchpad helps you point and click.'),
+        createQuestion('What should you do after typing a sentence?', ['Read it once to check', 'Delete it without reading', 'Close the screen', 'Press every key'], 'Read it once to check', 'Checking your sentence helps you notice mistakes.'),
+        createQuestion('Which information should stay private online?', ['Home address', 'Favorite color', 'Favorite fruit', 'Best school subject'], 'Home address', 'Your home address is personal information.'),
+        createQuestion('What is a safe choice if a link looks strange?', ['Do not click and ask for help', 'Click it quickly', 'Share it with everyone', 'Type your password there'], 'Do not click and ask for help', 'Unknown links can be unsafe, so pausing is a good habit.'),
+        createQuestion('Why is short daily typing practice useful?', ['It helps your fingers remember keys', 'It breaks the keyboard', 'It removes all mistakes forever', 'It stops learning'], 'It helps your fingers remember keys', 'Small practice sessions build typing comfort over time.'),
+      ]),
+    ],
+  },
+  {
+    id: 'money-basics',
+    title: 'Money Basics',
+    description: 'Practice needs, wants, saving, and simple spending plans.',
+    icon: WalletCards,
+    quizzes: [
+      createQuiz('money-starter', 'Money Starter', 'Review simple beginner money habits.', 'Easy', [
+        createQuestion('Which one is usually a need for school?', ['Notebook', 'Extra toy', 'Fancy sticker', 'Video game'], 'Notebook', 'A notebook helps with school work.'),
+        createQuestion('What is a want?', ['Something nice but not always necessary', 'Something needed to stay safe', 'Only food and water', 'Always the first choice'], 'Something nice but not always necessary', 'A want is nice to have, but a need comes first.'),
+        createQuestion('What does saving money mean?', ['Keeping some money for later', 'Spending everything now', 'Losing money', 'Ignoring money'], 'Keeping some money for later', 'Saving means keeping money for future use.'),
+        createQuestion('If you save 5 rupees each day for 7 days, how much do you save?', ['35 rupees', '7 rupees', '12 rupees', '5 rupees'], '35 rupees', 'Five rupees for seven days makes 35 rupees.'),
+        createQuestion('Why is a spending plan useful?', ['It helps you choose before spending', 'It makes money disappear', 'It removes all needs', 'It forces guessing'], 'It helps you choose before spending', 'A plan helps you think before using money.'),
+        createQuestion('Which should usually come first?', ['Needs', 'Wants', 'Random choices', 'Extra snacks'], 'Needs', 'Needs are important for daily life, so they usually come first.'),
+        createQuestion('If you have 50 rupees, what is a smart first step?', ['Make a small plan', 'Spend it all at once', 'Forget the amount', 'Give no thought to needs'], 'Make a small plan', 'A small plan helps you use money carefully.'),
+        createQuestion('Which is a good saving habit?', ['Save a small amount regularly', 'Spend all money quickly', 'Hide money and forget it', 'Never count savings'], 'Save a small amount regularly', 'Regular saving helps small amounts grow.'),
+        createQuestion('What should you change first if your plan does not fit?', ['A want', 'An important need', 'Your school notebook', 'Food money'], 'A want', 'Wants are easier to delay than needs.'),
+        createQuestion('Why should you count your savings?', ['To know your progress', 'To make it disappear', 'To spend faster', 'To avoid planning'], 'To know your progress', 'Counting savings helps you see how much you have saved.'),
       ]),
     ],
   },

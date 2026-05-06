@@ -1,14 +1,17 @@
 import { Search } from 'lucide-react'
 import { Link, useSearchParams } from 'react-router-dom'
 import CourseCard from '../components/CourseCard'
+import TranslatedText from '../components/TranslatedText'
 import Card from '../components/ui/Card'
 import { filterCourses, getCatalogSuggestions, getMatchingLessons } from '../data/courses'
 import { useLearning } from '../hooks/useLearning'
+import { useTranslatedText } from '../hooks/useTranslation'
 
 function Courses() {
   const [searchParams, setSearchParams] = useSearchParams()
   const searchTerm = searchParams.get('query') ?? ''
   const { getCourseSummary } = useLearning()
+  const searchPlaceholder = useTranslatedText('Search courses, lesson titles, or topics')
 
   const filteredCourses = filterCourses(searchTerm)
   const suggestions = getCatalogSuggestions(searchTerm)
@@ -25,23 +28,35 @@ function Courses() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-sm font-semibold text-muted">Courses</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-ink">Learning paths</h1>
-        <p className="mt-2 max-w-2xl text-muted">
-          Search by course, topic, or lesson and continue from where you left off.
+        <p className="text-sm font-semibold text-muted">
+          <TranslatedText text="Courses" />
         </p>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-ink">
+          <TranslatedText text="Learning paths" />
+        </h1>
+        <TranslatedText
+          as="p"
+          className="mt-2 max-w-2xl text-muted"
+          text="Search by course, topic, or lesson and continue from where you left off."
+        />
       </div>
 
       <Card className="space-y-5">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-xl font-semibold tracking-tight text-ink">Find the right lesson quickly</h2>
-            <p className="mt-1 text-sm text-muted">
-              Instant filtering keeps the experience light for slower connections and beginner learners.
-            </p>
+            <h2 className="text-xl font-semibold tracking-tight text-ink">
+              <TranslatedText text="Find the right lesson quickly" />
+            </h2>
+            <TranslatedText
+              as="p"
+              className="mt-1 text-sm text-muted"
+              text="Instant filtering keeps the experience light for slower connections and beginner learners."
+            />
           </div>
           <p className="text-sm font-semibold text-muted">
-            {filteredCourses.length} course{filteredCourses.length === 1 ? '' : 's'} shown
+            <TranslatedText
+              text={`${filteredCourses.length} course${filteredCourses.length === 1 ? '' : 's'} shown`}
+            />
           </p>
         </div>
 
@@ -54,7 +69,7 @@ function Courses() {
           <input
             className="h-12 w-full rounded-xl bg-surface pl-10 pr-4 text-sm text-ink shadow-sm ring-1 ring-slate-200/80 placeholder:text-muted focus:ring-2 focus:ring-palette-blue"
             onChange={(event) => updateSearch(event.target.value)}
-            placeholder="Search courses, lesson titles, or topics"
+            placeholder={searchPlaceholder.text}
             type="search"
             value={searchTerm}
           />
@@ -62,7 +77,9 @@ function Courses() {
 
         {searchTerm.trim() ? (
           <div className="space-y-3">
-            <p className="text-sm font-semibold text-muted">Suggested results</p>
+            <p className="text-sm font-semibold text-muted">
+              <TranslatedText text="Suggested results" />
+            </p>
             {suggestions.length ? (
               <div className="grid gap-3 md:grid-cols-2">
                 {suggestions.map((suggestion) => (
@@ -71,14 +88,18 @@ function Courses() {
                     key={suggestion.id}
                     to={suggestion.to}
                   >
-                    <span className="block text-sm font-semibold text-ink">{suggestion.title}</span>
-                    <span className="block text-xs text-muted">{suggestion.subtitle}</span>
+                    <span className="block text-sm font-semibold text-ink">
+                      <TranslatedText text={suggestion.title} />
+                    </span>
+                    <span className="block text-xs text-muted">
+                      <TranslatedText text={suggestion.subtitle} />
+                    </span>
                   </Link>
                 ))}
               </div>
             ) : (
               <p className="rounded-xl bg-palette-cream/60 px-4 py-3 text-sm text-muted">
-                No direct matches yet. Try a broader word like "reading", "plants", or "fraction".
+                <TranslatedText text='No direct matches yet. Try a broader word like "reading", "plants", or "fraction".' />
               </p>
             )}
           </div>
@@ -107,12 +128,17 @@ function Courses() {
         </div>
       ) : (
         <Card className="space-y-3">
-          <p className="text-sm font-semibold text-muted">No courses found</p>
-          <h2 className="text-2xl font-semibold tracking-tight text-ink">Try a simpler search term</h2>
-          <p className="max-w-2xl leading-7 text-muted">
-            Partial matches work best with short topic words. You can try terms like reading, math,
-            plants, or culture.
+          <p className="text-sm font-semibold text-muted">
+            <TranslatedText text="No courses found" />
           </p>
+          <h2 className="text-2xl font-semibold tracking-tight text-ink">
+            <TranslatedText text="Try a simpler search term" />
+          </h2>
+          <TranslatedText
+            as="p"
+            className="max-w-2xl leading-7 text-muted"
+            text="Partial matches work best with short topic words. You can try terms like reading, math, plants, or culture."
+          />
         </Card>
       )}
     </div>

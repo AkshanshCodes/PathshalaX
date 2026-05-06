@@ -1,4 +1,5 @@
 import { BookOpen, CheckCircle2, Trophy } from 'lucide-react'
+import TranslatedText from '../components/TranslatedText'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import ProgressBar from '../components/ui/ProgressBar'
@@ -23,11 +24,17 @@ function Progress() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-sm font-semibold text-muted">Progress</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-ink">Your learning progress</h1>
-        <p className="mt-2 max-w-2xl text-muted">
-          Track completed lessons, course percentages, and the easiest next step to continue.
+        <p className="text-sm font-semibold text-muted">
+          <TranslatedText text="Progress" />
         </p>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-ink">
+          <TranslatedText text="Your learning progress" />
+        </h1>
+        <TranslatedText
+          as="p"
+          className="mt-2 max-w-2xl text-muted"
+          text="Track completed lessons, course percentages, and the easiest next step to continue."
+        />
       </div>
 
       <section className="grid gap-4 md:grid-cols-3">
@@ -40,7 +47,9 @@ function Progress() {
                 <Icon aria-hidden="true" className="size-5" />
               </div>
               <div>
-                <p className="text-sm text-muted">{card.label}</p>
+                <p className="text-sm text-muted">
+                  <TranslatedText text={card.label} />
+                </p>
                 <p className="text-2xl font-semibold text-ink">{card.value}</p>
               </div>
             </Card>
@@ -52,16 +61,20 @@ function Progress() {
         <Card className="space-y-4">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-sm font-semibold text-muted">Continue learning</p>
+              <p className="text-sm font-semibold text-muted">
+                <TranslatedText text="Continue learning" />
+              </p>
               <h2 className="mt-1 text-2xl font-semibold tracking-tight text-ink">
-                {continueLearning.course.title}
+                <TranslatedText text={continueLearning.course.title} />
               </h2>
-              <p className="mt-1 text-muted">{continueLearning.continueLesson.title}</p>
+              <p className="mt-1 text-muted">
+                <TranslatedText text={continueLearning.continueLesson.title} />
+              </p>
             </div>
             <Button
               to={`/courses/${continueLearning.course.id}?lesson=${continueLearning.continueLesson.id}`}
             >
-              Resume lesson
+              <TranslatedText text="Resume lesson" />
             </Button>
           </div>
 
@@ -83,14 +96,20 @@ function Progress() {
                     </div>
                     <div>
                       <h2 className="text-xl font-semibold tracking-tight text-ink">
-                        {summary.course.title}
+                        <TranslatedText text={summary.course.title} />
                       </h2>
                       <p className="text-sm text-muted">
-                        {summary.completedCount} of {summary.totalLessons} lessons completed
+                        <TranslatedText
+                          text={`${summary.completedCount} of ${summary.totalLessons} lessons completed`}
+                        />
                       </p>
                     </div>
                   </div>
-                  <p className="max-w-2xl leading-7 text-muted">{summary.course.description}</p>
+                  <TranslatedText
+                    as="p"
+                    className="max-w-2xl leading-7 text-muted"
+                    text={summary.course.description}
+                  />
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
@@ -98,23 +117,30 @@ function Progress() {
                     to={`/courses/${summary.course.id}?lesson=${summary.continueLesson.id}`}
                     variant="secondary"
                   >
-                    Continue course
+                    <TranslatedText text="Continue course" />
                   </Button>
-                  <Button to={`/quiz?course=${summary.course.id}`}>Open quiz</Button>
+                  <Button to={`/quiz?course=${summary.course.id}`}>
+                    <TranslatedText text="Open quiz" />
+                  </Button>
                 </div>
               </div>
 
               <ProgressBar label="Completion" value={summary.progress} />
 
               <div className="flex flex-col gap-2 text-sm text-muted">
-                <p>Next lesson: {summary.continueLesson.title}</p>
+                <p>
+                  <TranslatedText text={`Next lesson: ${summary.continueLesson.title}`} />
+                </p>
                 {summary.quizResult ? (
                   <p>
-                    Best quiz score: {summary.quizResult.bestScore}/
-                    {summary.quizResult.totalQuestions} ({summary.quizResult.bestPercentage}%)
+                    <TranslatedText
+                      text={`Best quiz score: ${summary.quizResult.bestScore}/${summary.quizResult.totalQuestions} (${summary.quizResult.bestPercentage}%)`}
+                    />
                   </p>
                 ) : (
-                  <p>Quiz not attempted yet.</p>
+                  <p>
+                    <TranslatedText text="Quiz not attempted yet." />
+                  </p>
                 )}
               </div>
             </Card>

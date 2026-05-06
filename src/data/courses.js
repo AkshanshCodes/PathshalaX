@@ -1,4 +1,4 @@
-import { Calculator, Globe2, Languages, Microscope } from 'lucide-react'
+import { Calculator, Globe2, Languages, Microscope, Monitor, WalletCards } from 'lucide-react'
 
 export const courses = [
   {
@@ -923,6 +923,434 @@ export const courses = [
           feedback: {
             correct: 'Correct. It invites sharing without judging.',
             incorrect: 'A respectful question is open, calm, and ready to listen.',
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'computer-basics',
+    title: 'Computer Basics',
+    description:
+      'Learn simple computer parts, safe typing habits, and basic internet use.',
+    category: 'Digital Skills',
+    level: 'Beginner',
+    duration: '3 lessons',
+    icon: Monitor,
+    tone: 'bg-palette-pink/45 text-navy',
+    searchTerms: ['computer', 'keyboard', 'mouse', 'internet', 'digital'],
+    lessons: [
+      {
+        id: 'computer-parts',
+        title: 'Computer parts',
+        duration: '6 min',
+        summary: 'Learn the names of common computer parts and what they do.',
+        keywords: ['computer', 'screen', 'keyboard'],
+        viewerTitle: 'Know the basic parts',
+        viewerParagraphs: [
+          'A computer has parts that help you see, type, click, and hear.',
+          'Learning the names first makes every next step easier.',
+        ],
+        example: 'The screen shows work, the keyboard types words, and the mouse helps you click.',
+        practicePrompt: 'Point to a screen, keyboard, and mouse if you can see them nearby.',
+        notes: [
+          { type: 'heading', text: 'Main parts' },
+          {
+            type: 'paragraph',
+            text: 'Start with the parts you use most often.',
+          },
+          {
+            type: 'bullet-list',
+            items: ['Screen shows information.', 'Keyboard types letters.', 'Mouse helps you click.'],
+          },
+          {
+            type: 'paragraph',
+            text: 'You do not have to remember everything at once. First learn what each part is called, then learn how it helps you finish a small task.',
+          },
+          {
+            type: 'bullet-list',
+            items: [
+              'Use the screen to read messages.',
+              'Use the keyboard to enter words and numbers.',
+              'Use the mouse or touchpad to choose buttons and links.',
+            ],
+          },
+          {
+            type: 'highlight',
+            label: 'Simple idea',
+            text: 'Each part has one main job.',
+          },
+          {
+            type: 'highlight',
+            label: 'Try this',
+            text: 'Say the part name before using it: screen, keyboard, mouse. This builds confidence.',
+          },
+          { type: 'keywords', items: ['screen', 'keyboard', 'mouse'] },
+        ],
+      },
+      {
+        id: 'typing-practice',
+        title: 'Typing practice',
+        duration: '7 min',
+        summary: 'Use slow typing practice to make letters and words feel familiar.',
+        keywords: ['typing', 'letters', 'practice'],
+        viewerTitle: 'Type slowly first',
+        viewerParagraphs: [
+          'Fast typing comes later. At the start, accuracy matters more than speed.',
+          'Short daily typing practice helps your fingers remember the keys.',
+        ],
+        example: 'Practice line: My name is Ravi.',
+        practicePrompt: 'Type your name three times slowly and check every letter.',
+        notes: [
+          { type: 'heading', text: 'Build comfort' },
+          {
+            type: 'paragraph',
+            text: 'Typing gets easier when you repeat short lines calmly.',
+          },
+          {
+            type: 'bullet-list',
+            items: ['Sit comfortably.', 'Type slowly.', 'Check the letters.'],
+          },
+          {
+            type: 'paragraph',
+            text: 'Typing practice should feel calm. If you make a mistake, delete it and type the word again slowly.',
+          },
+          {
+            type: 'bullet-list',
+            items: [
+              'Start with your name.',
+              'Then type one short sentence.',
+              'Read the sentence before pressing enter.',
+            ],
+          },
+          {
+            type: 'highlight',
+            label: 'Remember',
+            text: 'Slow and correct is better than fast and confused.',
+          },
+          {
+            type: 'highlight',
+            label: 'Practice habit',
+            text: 'Five careful minutes every day is enough for a beginner.',
+          },
+          { type: 'keywords', items: ['type', 'slow', 'letters'] },
+        ],
+      },
+      {
+        id: 'internet-safety',
+        title: 'Internet safety',
+        duration: '8 min',
+        summary: 'Learn simple rules for safer browsing and personal information.',
+        keywords: ['internet', 'safe', 'password'],
+        viewerTitle: 'Stay careful online',
+        viewerParagraphs: [
+          'The internet can help you learn, but you should be careful with personal information.',
+          'Passwords, phone numbers, and addresses should not be shared with unknown people.',
+        ],
+        example: 'A safe habit is asking a trusted adult before entering personal details online.',
+        practicePrompt: 'Write one thing you should not share with strangers online.',
+        notes: [
+          { type: 'heading', text: 'Simple safety rules' },
+          {
+            type: 'paragraph',
+            text: 'Good online habits protect your information.',
+          },
+          {
+            type: 'bullet-list',
+            items: ['Keep passwords private.', 'Avoid unknown links.', 'Ask before sharing details.'],
+          },
+          {
+            type: 'paragraph',
+            text: 'Online safety is mostly about pausing before you click or share. A short pause can stop many problems.',
+          },
+          {
+            type: 'bullet-list',
+            items: [
+              'Do not share your password.',
+              'Do not share your home address with strangers.',
+              'Tell a trusted adult if something online feels wrong.',
+            ],
+          },
+          {
+            type: 'highlight',
+            label: 'Safety first',
+            text: 'When unsure, pause and ask someone you trust.',
+          },
+          {
+            type: 'highlight',
+            label: 'Safe choice',
+            text: 'A real learning website should not ask for private details without a clear reason.',
+          },
+          { type: 'keywords', items: ['safe', 'password', 'privacy'] },
+        ],
+      },
+    ],
+    quiz: {
+      title: 'Computer Basics Quiz',
+      description: 'Review simple computer parts, typing habits, and online safety.',
+      questions: [
+        {
+          id: 'screen',
+          prompt: 'Which part shows words and pictures?',
+          options: ['Screen', 'Keyboard', 'Mouse', 'Bag'],
+          correctAnswer: 'Screen',
+          feedback: {
+            correct: 'Correct. The screen shows what is happening on the computer.',
+            incorrect: 'The screen is the part you look at.',
+          },
+        },
+        {
+          id: 'typing',
+          prompt: 'What is best when you are learning to type?',
+          options: ['Type slowly and correctly', 'Press random keys', 'Close your eyes', 'Rush every word'],
+          correctAnswer: 'Type slowly and correctly',
+          feedback: {
+            correct: 'Correct. Slow typing helps you learn the keys.',
+            incorrect: 'Start slowly so your fingers learn the letters.',
+          },
+        },
+        {
+          id: 'password',
+          prompt: 'What should you do with your password?',
+          options: ['Keep it private', 'Share it with strangers', 'Write it on a public wall', 'Post it online'],
+          correctAnswer: 'Keep it private',
+          feedback: {
+            correct: 'Correct. A password protects your account.',
+            incorrect: 'Passwords should stay private.',
+          },
+        },
+        {
+          id: 'keyboard',
+          prompt: 'Which part helps you type letters?',
+          options: ['Keyboard', 'Screen', 'Bottle', 'Chair'],
+          correctAnswer: 'Keyboard',
+          feedback: {
+            correct: 'Correct. The keyboard has keys for typing letters and numbers.',
+            incorrect: 'The keyboard is the part used for typing.',
+          },
+        },
+        {
+          id: 'ask-first',
+          prompt: 'What should you do before sharing personal details online?',
+          options: ['Ask a trusted adult', 'Click every link', 'Share quickly', 'Ignore safety'],
+          correctAnswer: 'Ask a trusted adult',
+          feedback: {
+            correct: 'Correct. Asking first is a safe online habit.',
+            incorrect: 'It is safer to ask before sharing private details online.',
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: 'money-basics',
+    title: 'Money Basics',
+    description:
+      'Practice simple money ideas like saving, spending, needs, and wants.',
+    category: 'Life Skills',
+    level: 'Beginner',
+    duration: '3 lessons',
+    icon: WalletCards,
+    tone: 'bg-palette-green/55 text-navy',
+    searchTerms: ['money', 'saving', 'spending', 'needs', 'wants'],
+    lessons: [
+      {
+        id: 'needs-wants',
+        title: 'Needs and wants',
+        duration: '6 min',
+        summary: 'Understand the difference between things you need and things you want.',
+        keywords: ['needs', 'wants', 'choice'],
+        viewerTitle: 'Needs come first',
+        viewerParagraphs: [
+          'A need is something important for daily life, like food, water, or school supplies.',
+          'A want is something nice to have, but not always necessary right now.',
+        ],
+        example: 'A notebook for class is a need. A new toy may be a want.',
+        practicePrompt: 'Write two needs and two wants from your daily life.',
+        notes: [
+          { type: 'heading', text: 'Sort the choice' },
+          {
+            type: 'paragraph',
+            text: 'Sorting needs and wants helps you make better money choices.',
+          },
+          {
+            type: 'bullet-list',
+            items: ['Need: important now.', 'Want: nice to have.', 'Choose needs first.'],
+          },
+          {
+            type: 'paragraph',
+            text: 'This choice is not about good or bad. Wants are okay, but needs should usually be handled first.',
+          },
+          {
+            type: 'bullet-list',
+            items: [
+              'Food for lunch can be a need.',
+              'A notebook for school can be a need.',
+              'A toy or extra snack can be a want.',
+            ],
+          },
+          {
+            type: 'highlight',
+            label: 'Helpful question',
+            text: 'Do I need this today, or do I only want it?',
+          },
+          {
+            type: 'highlight',
+            label: 'Easy rule',
+            text: 'Needs help you continue your day. Wants make the day nicer.',
+          },
+          { type: 'keywords', items: ['need', 'want', 'choice'] },
+        ],
+      },
+      {
+        id: 'saving-small',
+        title: 'Saving small amounts',
+        duration: '7 min',
+        summary: 'See how saving a little money regularly can grow over time.',
+        keywords: ['saving', 'habit', 'money'],
+        viewerTitle: 'Small saving can grow',
+        viewerParagraphs: [
+          'Saving means keeping some money for later instead of spending all of it now.',
+          'Even a small amount becomes useful when you save it again and again.',
+        ],
+        example: 'If you save 5 rupees each day, you save 35 rupees in one week.',
+        practicePrompt: 'Choose one small amount you could save this week.',
+        notes: [
+          { type: 'heading', text: 'Save before spending all' },
+          {
+            type: 'paragraph',
+            text: 'Saving works best when it becomes a simple habit.',
+          },
+          {
+            type: 'bullet-list',
+            items: ['Keep a small amount aside.', 'Repeat the habit.', 'Use savings for a clear goal.'],
+          },
+          {
+            type: 'paragraph',
+            text: 'Saving does not mean you can never spend. It means you are choosing to keep some money for a better time.',
+          },
+          {
+            type: 'bullet-list',
+            items: [
+              'Pick one small saving goal.',
+              'Save the same amount again and again.',
+              'Count your savings at the end of the week.',
+            ],
+          },
+          {
+            type: 'highlight',
+            label: 'Simple math',
+            text: 'Small amounts can become bigger through repetition.',
+          },
+          {
+            type: 'highlight',
+            label: 'Example',
+            text: 'Saving 5 rupees for 7 days gives 35 rupees.',
+          },
+          { type: 'keywords', items: ['save', 'repeat', 'goal'] },
+        ],
+      },
+      {
+        id: 'spending-plan',
+        title: 'Simple spending plan',
+        duration: '8 min',
+        summary: 'Make a small plan before spending money.',
+        keywords: ['plan', 'spending', 'budget'],
+        viewerTitle: 'Plan before you spend',
+        viewerParagraphs: [
+          'A spending plan helps you decide where money should go.',
+          'Planning first can stop quick choices that you may regret later.',
+        ],
+        example: 'Plan: 20 rupees for a notebook, 10 rupees saved, and 5 rupees for a snack.',
+        practicePrompt: 'Make a simple plan for 50 rupees using needs, savings, and wants.',
+        notes: [
+          { type: 'heading', text: 'Use three boxes' },
+          {
+            type: 'paragraph',
+            text: 'A beginner plan can be very simple.',
+          },
+          {
+            type: 'bullet-list',
+            items: ['Box 1: needs.', 'Box 2: savings.', 'Box 3: wants.'],
+          },
+          {
+            type: 'paragraph',
+            text: 'A spending plan does not need difficult math. It just helps you think before the money is gone.',
+          },
+          {
+            type: 'bullet-list',
+            items: [
+              'Write the total money first.',
+              'Put needs before wants.',
+              'Keep a little money aside if possible.',
+            ],
+          },
+          {
+            type: 'highlight',
+            label: 'Good habit',
+            text: 'A plan gives your money a job.',
+          },
+          {
+            type: 'highlight',
+            label: 'Beginner tip',
+            text: 'If the plan does not fit, change the want first, not the need.',
+          },
+          { type: 'keywords', items: ['budget', 'plan', 'spend'] },
+        ],
+      },
+    ],
+    quiz: {
+      title: 'Money Basics Quiz',
+      description: 'Review needs, wants, saving, and simple spending plans.',
+      questions: [
+        {
+          id: 'need',
+          prompt: 'Which one is usually a need for school?',
+          options: ['Notebook', 'Extra toy', 'Fancy sticker', 'Video game'],
+          correctAnswer: 'Notebook',
+          feedback: {
+            correct: 'Correct. A notebook helps with school work.',
+            incorrect: 'A need is something important for daily life or study.',
+          },
+        },
+        {
+          id: 'saving',
+          prompt: 'What does saving money mean?',
+          options: ['Keeping some money for later', 'Spending everything now', 'Losing money', 'Ignoring money'],
+          correctAnswer: 'Keeping some money for later',
+          feedback: {
+            correct: 'Correct. Saving means keeping money for a future use.',
+            incorrect: 'Saving means not spending all the money right away.',
+          },
+        },
+        {
+          id: 'plan',
+          prompt: 'Why is a spending plan useful?',
+          options: ['It helps you choose before spending', 'It makes money disappear', 'It removes all needs', 'It forces guessing'],
+          correctAnswer: 'It helps you choose before spending',
+          feedback: {
+            correct: 'Correct. A plan helps you decide before spending.',
+            incorrect: 'A plan helps you think before using money.',
+          },
+        },
+        {
+          id: 'want',
+          prompt: 'What is a want?',
+          options: ['Something nice but not always necessary', 'Something needed to stay safe', 'Only food and water', 'Always the first choice'],
+          correctAnswer: 'Something nice but not always necessary',
+          feedback: {
+            correct: 'Correct. A want is nice to have, but a need comes first.',
+            incorrect: 'A want is something you may like, but may not need right now.',
+          },
+        },
+        {
+          id: 'weekly-saving',
+          prompt: 'If you save 5 rupees each day for 7 days, how much do you save?',
+          options: ['35 rupees', '7 rupees', '12 rupees', '5 rupees'],
+          correctAnswer: '35 rupees',
+          feedback: {
+            correct: 'Correct. 5 rupees for 7 days makes 35 rupees.',
+            incorrect: 'Add 5 seven times, or multiply 5 by 7.',
           },
         },
       ],

@@ -2,13 +2,16 @@ import { useState } from 'react'
 import { Bell, Menu, Search, UserCircle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { getCatalogSuggestions } from '../data/courses'
+import { useTranslatedText } from '../hooks/useTranslation'
 import LanguageToggle from './LanguageToggle'
+import TranslatedText from './TranslatedText'
 
 function TopNavbar({ onMenuClick }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestions = getCatalogSuggestions(query)
+  const searchPlaceholder = useTranslatedText('Search courses or lessons')
 
   function handleSearchSubmit(event) {
     event.preventDefault()
@@ -54,7 +57,7 @@ function TopNavbar({ onMenuClick }) {
                 setShowSuggestions(true)
               }}
               onFocus={() => setShowSuggestions(true)}
-              placeholder="Search courses or lessons"
+              placeholder={searchPlaceholder.text}
               type="search"
               value={query}
             />
@@ -73,25 +76,31 @@ function TopNavbar({ onMenuClick }) {
                       type="button"
                     >
                       <span>
-                        <span className="block text-sm font-semibold text-ink">{suggestion.title}</span>
-                        <span className="block text-xs text-muted">{suggestion.subtitle}</span>
+                        <span className="block text-sm font-semibold text-ink">
+                          <TranslatedText text={suggestion.title} />
+                        </span>
+                        <span className="block text-xs text-muted">
+                          <TranslatedText text={suggestion.subtitle} />
+                        </span>
                       </span>
                       <span className="rounded-full bg-palette-green/55 px-2.5 py-1 text-xs font-semibold text-ink">
-                        {suggestion.type}
+                        <TranslatedText text={suggestion.type} />
                       </span>
                     </button>
                   ))}
                 </div>
               ) : (
                 <div className="space-y-3 rounded-xl px-3 py-2">
-                  <p className="text-sm text-muted">No quick matches yet.</p>
+                  <p className="text-sm text-muted">
+                    <TranslatedText text="No quick matches yet." />
+                  </p>
                   <button
                     className="text-sm font-semibold text-ink"
                     onMouseDown={(event) => event.preventDefault()}
                     onClick={() => openSuggestion(`/courses?query=${encodeURIComponent(query.trim())}`)}
                     type="button"
                   >
-                    Search all courses for "{query.trim()}"
+                    <TranslatedText text={`Search all courses for "${query.trim()}"`} />
                   </button>
                 </div>
               )}

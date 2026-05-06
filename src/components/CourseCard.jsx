@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react'
+import TranslatedText from './TranslatedText'
 import Button from './ui/Button'
 import Card from './ui/Card'
 import ProgressBar from './ui/ProgressBar'
@@ -13,21 +14,23 @@ function CourseCard({ course, continueTo, nextLessonTitle, progress = 0, searchM
       </div>
 
       <div className="space-y-2.5">
-        <h3 className="text-xl font-semibold tracking-tight text-ink">{course.title}</h3>
+        <h3 className="text-xl font-semibold tracking-tight text-ink">
+          <TranslatedText text={course.title} />
+        </h3>
         <p className="text-sm leading-6 text-muted">
-          {course.description}
+          <TranslatedText text={course.description} />
         </p>
         <p className="text-sm font-medium text-muted">
-          {course.category} • {course.level} • {course.duration}
+          <TranslatedText text={`${course.category} • ${course.level} • ${course.duration}`} />
         </p>
         {searchMatches.length ? (
           <div className="rounded-xl bg-palette-blue/30 p-3 text-sm text-ink">
-            Suggested lessons: {searchMatches.join(', ')}
+            <TranslatedText text={`Suggested lessons: ${searchMatches.join(', ')}`} />
           </div>
         ) : null}
         {nextLessonTitle ? (
           <div className="rounded-xl bg-palette-green/45 p-3 text-sm text-ink">
-            Next lesson: {nextLessonTitle}
+            <TranslatedText text={`Next lesson: ${nextLessonTitle}`} />
           </div>
         ) : null}
       </div>
@@ -35,7 +38,7 @@ function CourseCard({ course, continueTo, nextLessonTitle, progress = 0, searchM
       <div className="mt-auto space-y-5">
         <ProgressBar label="Progress" value={progress} />
         <Button className="w-full" icon={ArrowRight} to={continueTo ?? `/courses/${course.id}`}>
-          {progress === 0 ? 'Start course' : 'Continue'}
+          <TranslatedText text={progress === 0 ? 'Start course' : 'Continue'} />
         </Button>
       </div>
     </Card>

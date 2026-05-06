@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { ArrowLeft, CheckCircle2, ChevronRight, RotateCcw, XCircle } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
+import AudioButton from '../components/AudioButton'
+import TranslatedText from '../components/TranslatedText'
 import Button from '../components/ui/Button'
 import ProgressBar from '../components/ui/ProgressBar'
 import { quizSubjects, getQuizSubjectById } from '../data/quizCatalog'
 import { useLearning } from '../hooks/useLearning'
+import { useTranslatedText } from '../hooks/useTranslation'
 
 const surfaceClass = 'rounded-[28px] bg-white p-6 shadow-[0_16px_40px_rgb(15_23_42_/_0.08)]'
 
@@ -29,17 +32,23 @@ function SubjectCard({ subject, onSelect }) {
             <Icon aria-hidden="true" className="size-7" />
           </div>
           <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-            {subject.quizzes.length} quizzes
+            <TranslatedText text={`${subject.quizzes.length} quizzes`} />
           </span>
         </div>
 
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">{subject.title}</h2>
-          <p className="leading-7 text-slate-600">{subject.description}</p>
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+            <TranslatedText text={subject.title} />
+          </h2>
+          <p className="leading-7 text-slate-600">
+            <TranslatedText text={subject.description} />
+          </p>
         </div>
 
         <div className="mt-auto flex items-center justify-between pt-2 text-sm font-semibold text-slate-700">
-          <span>Choose subject</span>
+          <span>
+            <TranslatedText text="Choose subject" />
+          </span>
           <ChevronRight aria-hidden="true" className="size-5 transition-transform group-hover:translate-x-1" />
         </div>
       </div>
@@ -52,8 +61,12 @@ function QuizCard({ quiz, onStart }) {
     <div className={`${surfaceClass} flex h-full flex-col gap-5`}>
       <div className="flex items-start justify-between gap-3">
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold tracking-tight text-slate-900">{quiz.title}</h3>
-          <p className="leading-7 text-slate-600">{quiz.description}</p>
+          <h3 className="text-xl font-semibold tracking-tight text-slate-900">
+            <TranslatedText text={quiz.title} />
+          </h3>
+          <p className="leading-7 text-slate-600">
+            <TranslatedText text={quiz.description} />
+          </p>
         </div>
         <span
           className={[
@@ -61,17 +74,21 @@ function QuizCard({ quiz, onStart }) {
             difficultyStyles[quiz.difficulty] ?? 'bg-slate-100 text-slate-700',
           ].join(' ')}
         >
-          {quiz.difficulty}
+          <TranslatedText text={quiz.difficulty} />
         </span>
       </div>
 
       <div className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
-        <span>{quiz.questions.length} questions</span>
-        <span>MCQ practice</span>
+        <span>
+          <TranslatedText text={`${quiz.questions.length} questions`} />
+        </span>
+        <span>
+          <TranslatedText text="MCQ practice" />
+        </span>
       </div>
 
       <Button className="mt-auto w-full" onClick={() => onStart(quiz.id)}>
-        Start Quiz
+        <TranslatedText text="Start Quiz" />
       </Button>
     </div>
   )
@@ -81,12 +98,17 @@ function SubjectSelectionStep({ onSelectSubject }) {
   return (
     <section className="space-y-8">
       <div className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Step 1</p>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Choose a Subject</h1>
-        <p className="max-w-3xl text-lg leading-8 text-slate-600">
-          Pick a subject to view its available quizzes. Each quiz is short, focused, and built for
-          steady practice.
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+          <TranslatedText text="Step 1" />
         </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
+          <TranslatedText text="Choose a Subject" />
+        </h1>
+        <TranslatedText
+          as="p"
+          className="max-w-3xl text-lg leading-8 text-slate-600"
+          text="Pick a subject to view its available quizzes. Each quiz is short, focused, and built for steady practice."
+        />
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -106,26 +128,36 @@ function QuizSelectionStep({ subject, onBack, onStartQuiz }) {
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="space-y-3">
           <Button icon={ArrowLeft} onClick={onBack} variant="ghost">
-            Back to subjects
+            <TranslatedText text="Back to subjects" />
           </Button>
           <div className="flex items-center gap-4">
             <div className="grid size-14 place-items-center rounded-2xl bg-[#1E293B] text-white">
               <SubjectIcon aria-hidden="true" className="size-7" />
             </div>
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Step 2</p>
-              <h1 className="text-4xl font-semibold tracking-tight text-slate-900">{subject.title}</h1>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+                <TranslatedText text="Step 2" />
+              </p>
+              <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
+                <TranslatedText text={subject.title} />
+              </h1>
             </div>
           </div>
-          <p className="max-w-3xl text-lg leading-8 text-slate-600">
-            Choose one quiz to begin. Each quiz has 10 questions and clear feedback after every answer.
-          </p>
+          <TranslatedText
+            as="p"
+            className="max-w-3xl text-lg leading-8 text-slate-600"
+            text="Choose one quiz to begin. Each quiz has 10 questions and clear feedback after every answer."
+          />
         </div>
 
         <div className={`${surfaceClass} max-w-sm space-y-2`}>
-          <p className="text-sm font-semibold text-slate-500">Available quizzes</p>
+          <p className="text-sm font-semibold text-slate-500">
+            <TranslatedText text="Available quizzes" />
+          </p>
           <p className="text-3xl font-semibold text-slate-900">{subject.quizzes.length}</p>
-          <p className="text-sm leading-6 text-slate-600">Easy, medium, and harder practice sets.</p>
+          <p className="text-sm leading-6 text-slate-600">
+            <TranslatedText text="Easy, medium, and harder practice sets." />
+          </p>
         </div>
       </div>
 
@@ -144,42 +176,68 @@ function QuizResultsStep({ quiz, score, subjectTitle, onRetry, onChooseAnotherQu
   return (
     <section className="space-y-6">
       <div className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Quiz Complete</p>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Results Summary</h1>
-        <p className="max-w-3xl text-lg leading-8 text-slate-600">
-          You finished the {quiz.title} quiz for {subjectTitle}. Review your score and choose your next step.
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+          <TranslatedText text="Quiz Complete" />
         </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
+          <TranslatedText text="Results Summary" />
+        </h1>
+        <TranslatedText
+          as="p"
+          className="max-w-3xl text-lg leading-8 text-slate-600"
+          text={`You finished the ${quiz.title} quiz for ${subjectTitle}. Review your score and choose your next step.`}
+        />
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
         <div className={`${surfaceClass} space-y-6`}>
           <div className="space-y-2">
-            <p className="text-sm font-semibold text-slate-500">Your score</p>
+            <p className="text-sm font-semibold text-slate-500">
+              <TranslatedText text="Your score" />
+            </p>
             <h2 className="text-5xl font-semibold tracking-tight text-slate-900">
               {score}/{quiz.questions.length}
             </h2>
-            <p className="text-lg font-medium text-slate-700">{percentage}% correct</p>
+            <p className="text-lg font-medium text-slate-700">
+              <TranslatedText text={`${percentage}% correct`} />
+            </p>
           </div>
 
           <div className="rounded-2xl bg-slate-50 p-4">
-            <p className="text-sm font-semibold text-slate-900">{quiz.title}</p>
-            <p className="mt-1 text-sm leading-6 text-slate-600">{quiz.description}</p>
+            <p className="text-sm font-semibold text-slate-900">
+              <TranslatedText text={quiz.title} />
+            </p>
+            <p className="mt-1 text-sm leading-6 text-slate-600">
+              <TranslatedText text={quiz.description} />
+            </p>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button onClick={onRetry} variant="secondary">
-              Retry Quiz
+              <TranslatedText text="Retry Quiz" />
             </Button>
-            <Button onClick={onChooseAnotherQuiz}>Choose Another Quiz</Button>
+            <Button onClick={onChooseAnotherQuiz}>
+              <TranslatedText text="Choose Another Quiz" />
+            </Button>
           </div>
         </div>
 
         <div className={`${surfaceClass} space-y-4`}>
-          <p className="text-sm font-semibold text-slate-500">Quick guidance</p>
+          <p className="text-sm font-semibold text-slate-500">
+            <TranslatedText text="Quick guidance" />
+          </p>
           <div className="space-y-3 text-slate-600">
-            <p>{percentage >= 80 ? 'Strong work. You are ready for another quiz in this subject.' : 'A retry can help lock in the ideas you missed.'}</p>
             <p>
-              Each PathshalaX quiz uses short practice so you can improve in small, repeatable steps.
+              <TranslatedText
+                text={
+                  percentage >= 80
+                    ? 'Strong work. You are ready for another quiz in this subject.'
+                    : 'A retry can help lock in the ideas you missed.'
+                }
+              />
+            </p>
+            <p>
+              <TranslatedText text="Each PathshalaX quiz uses short practice so you can improve in small, repeatable steps." />
             </p>
           </div>
         </div>
@@ -200,18 +258,24 @@ function QuizPlayStep({
   onChooseAnotherQuiz,
 }) {
   const progress = Math.round(((questionIndex + 1) / quiz.questions.length) * 100)
+  const translatedQuestion = useTranslatedText(question.prompt)
+  const hindiQuestion = useTranslatedText(question.prompt, 'hi')
 
   return (
     <section className="space-y-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Step 3</p>
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">{quiz.title}</h1>
-          <p className="text-lg leading-8 text-slate-600">{quiz.description}</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+            <TranslatedText text="Step 3" />
+          </p>
+          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
+            <TranslatedText text={quiz.title} />
+          </h1>
+          <TranslatedText as="p" className="text-lg leading-8 text-slate-600" text={quiz.description} />
         </div>
 
         <Button icon={ArrowLeft} onClick={onChooseAnotherQuiz} variant="ghost">
-          Back to quizzes
+          <TranslatedText text="Back to quizzes" />
         </Button>
       </div>
 
@@ -219,7 +283,7 @@ function QuizPlayStep({
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm font-semibold text-slate-500">
-              Question {questionIndex + 1} of {quiz.questions.length}
+              <TranslatedText text={`Question ${questionIndex + 1} of ${quiz.questions.length}`} />
             </p>
             <span
               className={[
@@ -227,7 +291,7 @@ function QuizPlayStep({
                 difficultyStyles[quiz.difficulty] ?? 'bg-slate-100 text-slate-700',
               ].join(' ')}
             >
-              {quiz.difficulty}
+              <TranslatedText text={quiz.difficulty} />
             </span>
           </div>
 
@@ -235,9 +299,20 @@ function QuizPlayStep({
         </div>
 
         <div className="space-y-3">
-          <h2 className="text-3xl font-semibold leading-snug tracking-tight text-slate-900">
-            {question.prompt}
-          </h2>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <h2 className="text-3xl font-semibold leading-snug tracking-tight text-slate-900">
+              {translatedQuestion.text}
+            </h2>
+            <div className="flex shrink-0 flex-wrap gap-2">
+              <AudioButton lang="en-US" text={question.prompt} />
+              <AudioButton lang="hi-IN" text={hindiQuestion.text} />
+            </div>
+          </div>
+          {translatedQuestion.isTranslating ? (
+            <p className="text-sm font-medium text-slate-500" aria-live="polite">
+              Translating question...
+            </p>
+          ) : null}
         </div>
 
         <div className="grid gap-3">
@@ -258,7 +333,7 @@ function QuizPlayStep({
                 onClick={() => onSelectOption(option)}
                 type="button"
               >
-                {option}
+                <TranslatedText text={option} />
               </button>
             )
           })}
@@ -280,11 +355,13 @@ function QuizPlayStep({
                 <XCircle aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
               )}
               <div className="space-y-1">
-                <p className="font-semibold">{feedback.isCorrect ? 'Correct answer' : 'Incorrect answer'}</p>
-                <p className="leading-7">{feedback.message}</p>
+                <p className="font-semibold">
+                  <TranslatedText text={feedback.isCorrect ? 'Correct answer' : 'Incorrect answer'} />
+                </p>
+                <TranslatedText as="p" className="leading-7" text={feedback.message} />
                 {!feedback.isCorrect ? (
                   <p className="text-sm font-semibold">
-                    Correct answer: {question.correctAnswer}
+                    <TranslatedText text={`Correct answer: ${question.correctAnswer}`} />
                   </p>
                 ) : null}
               </div>
@@ -294,16 +371,18 @@ function QuizPlayStep({
 
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
           <Button icon={RotateCcw} onClick={onChooseAnotherQuiz} variant="ghost">
-            Choose Another Quiz
+            <TranslatedText text="Choose Another Quiz" />
           </Button>
 
           {feedback ? (
             <Button onClick={onNextQuestion}>
-              {questionIndex === quiz.questions.length - 1 ? 'View Results' : 'Next Question'}
+              <TranslatedText
+                text={questionIndex === quiz.questions.length - 1 ? 'View Results' : 'Next Question'}
+              />
             </Button>
           ) : (
             <Button disabled={!selectedOption} onClick={onCheckAnswer}>
-              Check Answer
+              <TranslatedText text="Check Answer" />
             </Button>
           )}
         </div>

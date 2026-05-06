@@ -7,6 +7,7 @@ import {
   X,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
+import TranslatedText from './TranslatedText'
 
 const items = [
   { label: 'Dashboard', to: '/', icon: Gauge },
@@ -26,7 +27,9 @@ function SidebarContent({ onClose }) {
           </span>
           <span>
             <span className="block text-lg font-bold text-white">PathshalaX</span>
-            <span className="block text-xs text-white/60">Simple Learning Beyond Barriers</span>
+            <span className="block text-xs text-white/60">
+              <TranslatedText text="Simple Learning Beyond Barriers" />
+            </span>
           </span>
         </NavLink>
         <button
@@ -58,7 +61,7 @@ function SidebarContent({ onClose }) {
               to={item.to}
             >
               <Icon aria-hidden="true" className="size-5" />
-              {item.label}
+              <TranslatedText text={item.label} />
             </NavLink>
           )
         })}

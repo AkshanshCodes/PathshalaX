@@ -1,9 +1,11 @@
 import { ArrowRight, BookOpen, CheckCircle2, Target, Trophy } from 'lucide-react'
 import CourseCard from '../components/CourseCard'
+import DailyLearningTip from '../components/DailyLearningTip'
+import RecommendedResources from '../components/RecommendedResources'
+import TranslatedText from '../components/TranslatedText'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import ProgressBar from '../components/ui/ProgressBar'
-import { dailyTip } from '../data/courses'
 import { useLearning } from '../hooks/useLearning'
 
 function Home() {
@@ -30,29 +32,26 @@ function Home() {
     <div className="space-y-6 sm:space-y-7">
       <section className="grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
         <Card className="space-y-5">
-          <p className="text-sm font-semibold text-muted">Welcome back</p>
+          <p className="text-sm font-semibold text-muted">
+            <TranslatedText text="Welcome back" />
+          </p>
           <div>
             <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">PathshalaX</h1>
-            <p className="mt-2 text-lg font-medium text-muted">Simple Learning Beyond Barriers</p>
+            <p className="mt-2 text-lg font-medium text-muted">
+              <TranslatedText text="Simple Learning Beyond Barriers" />
+            </p>
           </div>
-          <p className="max-w-2xl leading-7 text-muted">
-            A clean learning space with short lessons, clear notes, practice quizzes, and visible
-            progress that works well even in low-connectivity study moments.
-          </p>
+          <TranslatedText
+            as="p"
+            className="max-w-2xl leading-7 text-muted"
+            text="A clean learning space with short lessons, clear notes, practice quizzes, and visible progress that works well even in low-connectivity study moments."
+          />
           <Button className="w-full sm:w-auto" icon={ArrowRight} to="/courses">
-            Browse courses
+            <TranslatedText text="Browse courses" />
           </Button>
         </Card>
 
-        <Card className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="grid size-11 place-items-center rounded-xl bg-palette-green/70 text-navy">
-              <BookOpen aria-hidden="true" className="size-5" />
-            </div>
-            <h2 className="text-xl font-semibold tracking-tight text-ink">{dailyTip.title}</h2>
-          </div>
-          <p className="leading-7 text-muted">{dailyTip.text}</p>
-        </Card>
+        <DailyLearningTip />
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -65,7 +64,9 @@ function Home() {
                 <Icon aria-hidden="true" className="size-5" />
               </div>
               <div>
-                <p className="text-sm text-muted">{stat.label}</p>
+                <p className="text-sm text-muted">
+                  <TranslatedText text={stat.label} />
+                </p>
                 <p className="text-2xl font-semibold text-ink">{stat.value}</p>
               </div>
             </Card>
@@ -81,30 +82,36 @@ function Home() {
                 {ContinueIcon ? <ContinueIcon aria-hidden="true" className="size-6" /> : null}
               </div>
               <div>
-                <p className="text-sm font-semibold text-muted">{continueCourse.title}</p>
+                <p className="text-sm font-semibold text-muted">
+                  <TranslatedText text={continueCourse.title} />
+                </p>
                 <h2 className="text-xl font-semibold tracking-tight text-ink">{continueLesson.title}</h2>
               </div>
             </div>
             <ProgressBar label="Course progress" value={continueLearning.progress} />
             <p className="rounded-xl bg-palette-green/45 p-4 text-sm text-ink">
-              Next focus: {continueLesson.summary}
+              <TranslatedText text={`Next focus: ${continueLesson.summary}`} />
             </p>
             <Button
               className="w-full"
               to={`/courses/${continueCourse.id}?lesson=${continueLesson.id}`}
             >
-              Continue learning
+              <TranslatedText text="Continue learning" />
             </Button>
           </Card>
 
           <div className="space-y-4">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold text-muted">Featured courses</p>
-                <h2 className="mt-1 text-2xl font-semibold tracking-tight text-ink">Start learning</h2>
+                <p className="text-sm font-semibold text-muted">
+                  <TranslatedText text="Featured courses" />
+                </p>
+                <h2 className="mt-1 text-2xl font-semibold tracking-tight text-ink">
+                  <TranslatedText text="Start learning" />
+                </h2>
               </div>
               <Button to="/courses" variant="secondary">
-                View all
+                <TranslatedText text="View all" />
               </Button>
             </div>
 
@@ -122,6 +129,8 @@ function Home() {
           </div>
         </section>
       ) : null}
+
+      <RecommendedResources />
     </div>
   )
 }

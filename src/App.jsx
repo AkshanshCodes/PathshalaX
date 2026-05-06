@@ -3,9 +3,9 @@ import AppLayout from './components/AppLayout'
 import CourseDetail from './pages/CourseDetail'
 import Courses from './pages/Courses'
 import Home from './pages/Home'
-import PlaceholderPage from './pages/PlaceholderPage'
 import Progress from './pages/Progress'
 import Quiz from './pages/Quiz'
+import Resources from './pages/Resources'
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:courseId" element={<CourseDetail />} />
         <Route path="/quiz" element={<Quiz />} />
-        <Route path="/resources" element={<PlaceholderPage title="Resources" />} />
+        <Route path="/resources" element={<Resources />} />
         <Route path="/progress" element={<Progress />} />
       </Route>
     </Routes>
