@@ -1,18 +1,30 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, BookOpen, CheckCircle2, Target, Trophy } from 'lucide-react'
 import CourseCard from '../components/CourseCard'
 import Button from '../components/ui/Button'
 import Card from '../components/ui/Card'
 import ProgressBar from '../components/ui/ProgressBar'
-import {
-  continueLearning,
-  dailyTip,
-  featuredCourses,
-  progressStats,
-} from '../data/courses'
+import { dailyTip } from '../data/courses'
+import { useLearning } from '../hooks/useLearning'
 
 function Home() {
-  const ContinueIcon = continueLearning.icon
-  const TipIcon = dailyTip.icon
+  const {
+    averageProgress,
+    completedCourseCount,
+    continueLearning,
+    courseSummaries,
+    totalLessonsCompleted,
+  } = useLearning()
+
+  const stats = [
+    { label: 'Active courses', value: String(courseSummaries.length).padStart(2, '0'), icon: BookOpen },
+    { label: 'Lessons done', value: String(totalLessonsCompleted).padStart(2, '0'), icon: CheckCircle2 },
+    { label: 'Courses completed', value: String(completedCourseCount).padStart(2, '0'), icon: Trophy },
+    { label: 'Average progress', value: `${averageProgress}%`, icon: Target },
+  ]
+
+  const continueCourse = continueLearning?.course
+  const continueLesson = continueLearning?.continueLesson
+  const ContinueIcon = continueCourse?.icon
 
   return (
     <div className="space-y-6 sm:space-y-7">
@@ -20,15 +32,12 @@ function Home() {
         <Card className="space-y-5">
           <p className="text-sm font-semibold text-muted">Welcome back</p>
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              PathshalaX
-            </h1>
-            <p className="mt-2 text-lg font-medium text-muted">
-              Simple Learning Beyond Barriers
-            </p>
+            <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">PathshalaX</h1>
+            <p className="mt-2 text-lg font-medium text-muted">Simple Learning Beyond Barriers</p>
           </div>
           <p className="max-w-2xl leading-7 text-muted">
-            A clean student dashboard for lessons, notes, practice, and steady progress.
+            A clean learning space with short lessons, clear notes, practice quizzes, and visible
+            progress that works well even in low-connectivity study moments.
           </p>
           <Button className="w-full sm:w-auto" icon={ArrowRight} to="/courses">
             Browse courses
@@ -38,7 +47,7 @@ function Home() {
         <Card className="space-y-4">
           <div className="flex items-center gap-3">
             <div className="grid size-11 place-items-center rounded-xl bg-palette-green/70 text-navy">
-              <TipIcon aria-hidden="true" className="size-5" />
+              <BookOpen aria-hidden="true" className="size-5" />
             </div>
             <h2 className="text-xl font-semibold tracking-tight text-ink">{dailyTip.title}</h2>
           </div>
@@ -47,7 +56,7 @@ function Home() {
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {progressStats.map((stat) => {
+        {stats.map((stat) => {
           const Icon = stat.icon
 
           return (
@@ -64,47 +73,55 @@ function Home() {
         })}
       </section>
 
-      <section className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
-        <Card className="space-y-5">
-          <div className="flex items-center gap-3">
-            <div className="grid size-12 place-items-center rounded-xl bg-palette-blue/55 text-navy">
-              <ContinueIcon aria-hidden="true" className="size-6" />
+      {continueCourse && continueLesson ? (
+        <section className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
+          <Card className="space-y-5">
+            <div className="flex items-center gap-3">
+              <div className={`grid size-12 place-items-center rounded-xl ${continueCourse.tone}`}>
+                {ContinueIcon ? <ContinueIcon aria-hidden="true" className="size-6" /> : null}
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-muted">{continueCourse.title}</p>
+                <h2 className="text-xl font-semibold tracking-tight text-ink">{continueLesson.title}</h2>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-semibold text-muted">{continueLearning.course}</p>
-              <h2 className="text-xl font-semibold tracking-tight text-ink">
-                {continueLearning.title}
-              </h2>
-            </div>
-          </div>
-          <ProgressBar label="Course progress" value={continueLearning.progress} />
-          <p className="rounded-xl bg-palette-green/45 p-4 text-sm text-ink">
-            Next: {continueLearning.nextLesson}
-          </p>
-          <Button className="w-full" to="/courses/english-basics">
-            Continue learning
-          </Button>
-        </Card>
-
-        <div className="space-y-4">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-sm font-semibold text-muted">Featured courses</p>
-              <h2 className="mt-1 text-2xl font-semibold tracking-tight text-ink">
-                Start learning
-              </h2>
-            </div>
-            <Button to="/courses" variant="secondary">
-              View all
+            <ProgressBar label="Course progress" value={continueLearning.progress} />
+            <p className="rounded-xl bg-palette-green/45 p-4 text-sm text-ink">
+              Next focus: {continueLesson.summary}
+            </p>
+            <Button
+              className="w-full"
+              to={`/courses/${continueCourse.id}?lesson=${continueLesson.id}`}
+            >
+              Continue learning
             </Button>
+          </Card>
+
+          <div className="space-y-4">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold text-muted">Featured courses</p>
+                <h2 className="mt-1 text-2xl font-semibold tracking-tight text-ink">Start learning</h2>
+              </div>
+              <Button to="/courses" variant="secondary">
+                View all
+              </Button>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {courseSummaries.slice(0, 2).map((summary) => (
+                <CourseCard
+                  continueTo={`/courses/${summary.course.id}?lesson=${summary.continueLesson.id}`}
+                  course={summary.course}
+                  key={summary.course.id}
+                  nextLessonTitle={summary.continueLesson.title}
+                  progress={summary.progress}
+                />
+              ))}
+            </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {featuredCourses.slice(0, 2).map((course) => (
-              <CourseCard course={course} key={course.id} />
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
     </div>
   )
 }
