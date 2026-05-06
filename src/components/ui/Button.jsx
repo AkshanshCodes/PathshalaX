@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom'
 
 const variants = {
   primary:
-    'bg-sage-700 text-white hover:bg-sage-800 active:bg-sage-900 shadow-soft',
+    'bg-navy text-white shadow-soft hover:bg-[#2d3440] active:bg-navy',
   secondary:
-    'border border-sage-200 bg-white text-sage-800 hover:border-sage-300 hover:bg-sage-50',
-  ghost: 'text-sage-800 hover:bg-sage-50',
+    'bg-surface text-ink shadow-sm ring-1 ring-palette-blue hover:bg-palette-blue/35 hover:ring-palette-blue',
+  ghost: 'text-ink hover:bg-palette-blue/35',
 }
 
 function Button({ children, className = '', icon: Icon, to, variant = 'primary', ...props }) {
   const classes = [
-    'inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-60',
+    'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60',
     variants[variant],
     className,
   ].join(' ')

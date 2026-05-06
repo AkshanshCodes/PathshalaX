@@ -3,24 +3,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        sage: {
-          50: '#f6f8f4',
-          100: '#e8efe2',
-          200: '#d5e2c8',
-          300: '#b8cc9f',
-          400: '#96b274',
-          500: '#789957',
-          600: '#5d7942',
-          700: '#4b6037',
-          800: '#3f4f31',
-          900: '#36452d',
-        },
-        ink: '#223029',
-        muted: '#65736b',
-        warm: '#fbfaf5',
+        'palette-pink': '#f9b2d7',
+        'palette-blue': '#cfecf3',
+        'palette-green': '#daf9de',
+        'palette-cream': '#f6ffdc',
+        navy: '#222831',
+        ink: '#20252d',
+        muted: '#68727f',
+        warm: '#fafaf7',
+        surface: '#ffffff',
       },
       boxShadow: {
-        soft: '0 18px 45px rgba(68, 92, 74, 0.08)',
+        soft: '0 18px 45px rgb(34 40 49 / 0.08)',
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
