@@ -310,7 +310,7 @@ function QuizPlayStep({
           </div>
           {translatedQuestion.isTranslating ? (
             <p className="text-sm font-medium text-slate-500" aria-live="polite">
-              Translating question...
+              <TranslatedText text="Translating question..." />
             </p>
           ) : null}
         </div>

@@ -85,7 +85,9 @@ function Home() {
                 <p className="text-sm font-semibold text-muted">
                   <TranslatedText text={continueCourse.title} />
                 </p>
-                <h2 className="text-xl font-semibold tracking-tight text-ink">{continueLesson.title}</h2>
+                <h2 className="text-xl font-semibold tracking-tight text-ink">
+                  <TranslatedText text={continueLesson.title} />
+                </h2>
               </div>
             </div>
             <ProgressBar label="Course progress" value={continueLearning.progress} />

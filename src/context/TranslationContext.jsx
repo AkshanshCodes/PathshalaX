@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { translateWithLibreTranslate } from '../api/translation'
 import { getLocalHindiTranslation } from '../data/hindiTranslations'
 import TranslationContext from './translation-context'
@@ -42,7 +42,7 @@ export function TranslationProvider({ children }) {
     return () => window.clearTimeout(timeoutId)
   }, [errorMessage])
 
-  async function translateText(text, targetLanguage = language, signal) {
+  const translateText = useCallback(async (text, targetLanguage = language, signal) => {
     if (!text || targetLanguage === 'en') {
       return text
     }
@@ -51,6 +51,10 @@ export function TranslationProvider({ children }) {
 
     if (localTranslation) {
       return localTranslation
+    }
+
+    if (targetLanguage === 'hi') {
+      return text
     }
 
     try {
@@ -70,20 +74,23 @@ export function TranslationProvider({ children }) {
 
       return text
     }
-  }
+  }, [language])
 
-  function toggleLanguage() {
+  const toggleLanguage = useCallback(() => {
     setErrorMessage('')
     setLanguage((currentLanguage) => (currentLanguage === 'en' ? 'hi' : 'en'))
-  }
+  }, [])
 
-  const value = {
-    errorMessage,
-    language,
-    setLanguage,
-    toggleLanguage,
-    translateText,
-  }
+  const value = useMemo(
+    () => ({
+      errorMessage,
+      language,
+      setLanguage,
+      toggleLanguage,
+      translateText,
+    }),
+    [errorMessage, language, toggleLanguage, translateText],
+  )
 
   return <TranslationContext.Provider value={value}>{children}</TranslationContext.Provider>
 }
