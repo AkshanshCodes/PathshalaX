@@ -304,7 +304,7 @@ function QuizPlayStep({
               {translatedQuestion.text}
             </h2>
             <div className="flex shrink-0 flex-wrap gap-2">
-              <AudioButton lang="en-US" text={question.prompt} />
+              <AudioButton lang="en-IN" text={question.prompt} />
               <AudioButton lang="hi-IN" text={hindiQuestion.text} />
             </div>
           </div>

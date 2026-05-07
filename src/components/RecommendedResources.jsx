@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BookOpen, ExternalLink, RefreshCw } from 'lucide-react'
 import { fetchRecommendedResources, resourceTopics } from '../api/resources'
+import { useTranslation } from '../hooks/useTranslation'
 import Button from './ui/Button'
 import Card from './ui/Card'
 import TranslatedText from './TranslatedText'
@@ -21,6 +22,17 @@ function ResourceCover({ resource }) {
       loading="lazy"
       src={resource.coverUrl}
     />
+  )
+}
+
+function ResourceLanguageBadge({ languageCode }) {
+  const { getLanguageLabel } = useTranslation()
+  const languageLabel = getLanguageLabel(languageCode) || languageCode
+
+  return (
+    <p className="rounded-full bg-palette-blue/45 px-3 py-1 text-xs font-semibold text-ink">
+      <TranslatedText text={languageLabel} />
+    </p>
   )
 }
 
@@ -137,9 +149,7 @@ function RecommendedResources() {
                       <BookOpen aria-hidden="true" className="size-4" />
                       <TranslatedText text={resource.category} />
                     </p>
-                    <p className="rounded-full bg-palette-blue/45 px-3 py-1 text-xs font-semibold text-ink">
-                      <TranslatedText text={resource.language} />
-                    </p>
+                    <ResourceLanguageBadge languageCode={resource.languageCode} />
                     <p className="inline-flex items-center gap-1 text-xs font-semibold text-ink">
                       <ExternalLink aria-hidden="true" className="size-4" />
                       <TranslatedText text="Read online" />

@@ -1,9 +1,10 @@
 import { Square, Volume2 } from 'lucide-react'
 import { useSpeechSynthesis } from '../hooks/useSpeechSynthesis'
 
-function AudioButton({ lang = 'en-US', label, text }) {
+function AudioButton({ lang = 'en-IN', label, text }) {
   const { isSpeaking, isSupported, message, speak, stop } = useSpeechSynthesis()
-  const buttonLabel = label ?? (lang === 'hi-IN' ? 'Play Hindi audio' : 'Play English audio')
+  const isHindi = lang?.startsWith('hi')
+  const buttonLabel = label ?? (isHindi ? 'Play Hindi audio' : 'Play English audio')
   const statusMessage = isSupported ? message : 'Audio playback is not supported in this browser.'
 
   function handleClick() {
@@ -29,7 +30,7 @@ function AudioButton({ lang = 'en-US', label, text }) {
         ) : (
           <Volume2 aria-hidden="true" className="size-4" />
         )}
-        <span>{lang === 'hi-IN' ? 'HI' : 'EN'}</span>
+        <span>{isHindi ? 'HI' : 'EN'}</span>
       </button>
       {statusMessage ? (
         <span aria-live="polite" className="max-w-52 text-xs font-medium text-rose-700">

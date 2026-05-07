@@ -18,6 +18,13 @@ export const resourceTopics = [
     category: 'Indian stories',
   },
   {
+    id: 'comics',
+    label: 'Comics',
+    query: 'amar chitra katha',
+    language: 'eng',
+    category: 'Indian comics',
+  },
+  {
     id: 'indian-leaders',
     label: 'Indian Leaders',
     query: 'mahatma gandhi children',
@@ -51,16 +58,14 @@ function getReadableUrl(work) {
   return work.key ? `${OPEN_LIBRARY_BASE_URL}${work.key}` : OPEN_LIBRARY_BASE_URL
 }
 
-function getLanguageLabel(languageCode) {
-  if (languageCode === 'hin') {
-    return 'Hindi'
+function getResourceLanguageCode(work, topic) {
+  const rawLanguage = Array.isArray(work.language) ? work.language[0] : topic.language
+
+  if (typeof rawLanguage === 'object' && rawLanguage?.key) {
+    return rawLanguage.key
   }
 
-  if (languageCode === 'eng') {
-    return 'English'
-  }
-
-  return 'Indian languages'
+  return rawLanguage || topic.language
 }
 
 export async function fetchRecommendedResources({
@@ -94,7 +99,7 @@ export async function fetchRecommendedResources({
     author: work.author_name?.[0] ?? 'Author unavailable',
     category: topic.category,
     coverUrl: getCoverUrl(work.cover_i),
-    language: getLanguageLabel(topic.language),
+    languageCode: getResourceLanguageCode(work, topic),
     url: getReadableUrl(work),
   }))
 }
