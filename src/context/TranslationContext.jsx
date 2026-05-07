@@ -11,7 +11,11 @@ function readStoredLanguage() {
     return 'en'
   }
 
-  return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) === 'hi' ? 'hi' : 'en'
+  try {
+    return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) === 'hi' ? 'hi' : 'en'
+  } catch {
+    return 'en'
+  }
 }
 
 export function TranslationProvider({ children }) {
@@ -19,7 +23,11 @@ export function TranslationProvider({ children }) {
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
+    try {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
+    } catch {
+      // Browsers can block localStorage in private or restricted contexts.
+    }
   }, [language])
 
   useEffect(() => {

@@ -14,6 +14,11 @@ function DailyLearningTip() {
 
     fetchDailyLearningTip({ signal: controller.signal })
       .then(setTip)
+      .catch((error) => {
+        if (error.name !== 'AbortError') {
+          setTip(FALLBACK_TIP)
+        }
+      })
       .finally(() => {
         if (!controller.signal.aborted) {
           setIsLoading(false)
