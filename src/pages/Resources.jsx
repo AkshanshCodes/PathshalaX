@@ -17,7 +17,7 @@ function Resources() {
         <TranslatedText
           as="p"
           className="max-w-2xl leading-7 text-muted"
-          text="Simple reading support, book ideas, and daily motivation for learners."
+          text="Simple reading support, book ideas, comics, and daily motivation for learners."
         />
       </Card>
 

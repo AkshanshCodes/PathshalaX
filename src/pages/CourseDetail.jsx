@@ -8,6 +8,7 @@ import {
   Search,
 } from 'lucide-react'
 import { useParams, useSearchParams } from 'react-router-dom'
+import AudioButton from '../components/AudioButton'
 import NotesRenderer from '../components/NotesRenderer'
 import TranslatedText from '../components/TranslatedText'
 import Button from '../components/ui/Button'
@@ -21,7 +22,41 @@ import {
   getLessonById,
 } from '../data/courses'
 import { useLearning } from '../hooks/useLearning'
-import { useTranslatedText } from '../hooks/useTranslation'
+import { useTranslatedText, useTranslatedTextList } from '../hooks/useTranslation'
+
+function getLessonNotesAudioSegments(notes = []) {
+  return notes
+    .flatMap((note) => {
+      if (note.type === 'heading' || note.type === 'paragraph') {
+        return note.text
+      }
+
+      if (note.type === 'bullet-list') {
+        return note.items
+      }
+
+      if (note.type === 'highlight') {
+        return [note.label, note.text]
+      }
+
+      if (note.type === 'keywords') {
+        return note.items
+      }
+
+      return []
+    })
+}
+
+function getLessonViewerAudioSegments(lesson) {
+  return [
+    lesson.viewerTitle,
+    ...lesson.viewerParagraphs,
+    'Example',
+    lesson.example,
+    'Practice prompt',
+    lesson.practicePrompt,
+  ]
+}
 
 function CourseDetail() {
   const { courseId } = useParams()
@@ -37,6 +72,12 @@ function CourseDetail() {
     (course && getLessonById(course, requestedLessonId ?? summary?.currentLesson?.id)) ??
     course?.lessons[0] ??
     null
+  const lessonNotesAudioSegments = currentLesson ? getLessonNotesAudioSegments(currentLesson.notes) : []
+  const lessonViewerAudioSegments = currentLesson ? getLessonViewerAudioSegments(currentLesson) : []
+  const lessonNotesAudioText = lessonNotesAudioSegments.join('. ')
+  const lessonViewerAudioText = lessonViewerAudioSegments.join('. ')
+  const hindiLessonNotesAudio = useTranslatedTextList(lessonNotesAudioSegments, 'hi')
+  const hindiLessonViewerAudio = useTranslatedTextList(lessonViewerAudioSegments, 'hi')
 
   const syncCurrentLesson = useEffectEvent((nextCourseId, nextLessonId) => {
     setCurrentLesson(nextCourseId, nextLessonId)
@@ -193,8 +234,12 @@ function CourseDetail() {
                 />
               </div>
 
-              <div className="rounded-full bg-palette-green/45 px-3 py-1.5 text-sm font-semibold text-ink">
-                <TranslatedText text={lessonCompleted ? 'Completed' : 'In progress'} />
+              <div className="flex flex-wrap items-start justify-end gap-2">
+                <AudioButton lang="en-IN" text={lessonNotesAudioText} />
+                <AudioButton lang="hi-IN" text={hindiLessonNotesAudio.text} />
+                <div className="rounded-full bg-palette-green/45 px-3 py-1.5 text-sm font-semibold text-ink">
+                  <TranslatedText text={lessonCompleted ? 'Completed' : 'In progress'} />
+                </div>
               </div>
             </div>
 
@@ -202,13 +247,20 @@ function CourseDetail() {
           </Card>
 
           <Card className="space-y-5">
-            <div>
-              <p className="text-sm font-semibold text-muted">
-                <TranslatedText text="Lesson viewer" />
-              </p>
-              <h2 className="mt-1 text-2xl font-semibold tracking-tight text-ink">
-                <TranslatedText text={currentLesson.viewerTitle} />
-              </h2>
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+              <div>
+                <p className="text-sm font-semibold text-muted">
+                  <TranslatedText text="Lesson viewer" />
+                </p>
+                <h2 className="mt-1 text-2xl font-semibold tracking-tight text-ink">
+                  <TranslatedText text={currentLesson.viewerTitle} />
+                </h2>
+              </div>
+
+              <div className="flex shrink-0 flex-wrap gap-2">
+                <AudioButton lang="en-IN" text={lessonViewerAudioText} />
+                <AudioButton lang="hi-IN" text={hindiLessonViewerAudio.text} />
+              </div>
             </div>
 
             <div className="space-y-4">

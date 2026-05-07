@@ -52,8 +52,8 @@ export const hindiTranslations = {
   'Practice with a fun game made for PathshalaX learners.':
     'PathshalaX सीखने वालों के लिए बनाए गए मजेदार खेल से अभ्यास करें।',
   'Play learning game': 'सीखने वाला खेल खेलें',
-  'Simple reading support, book ideas, and daily motivation for learners.':
-    'सीखने वालों के लिए सरल पढ़ाई सहायता, किताबों के सुझाव और रोज की प्रेरणा।',
+  'Simple reading support, book ideas, comics, and daily motivation for learners.':
+    'सीखने वालों के लिए सरल पढ़ाई सहायता, किताबों के सुझाव, कॉमिक्स और रोज की प्रेरणा।',
   'Recommended Resources': 'सुझाए गए संसाधन',
   'Open Library picks': 'ओपन लाइब्रेरी से सुझाव',
   'Indian learner picks': 'भारतीय सीखने वालों के लिए किताबें',
@@ -66,10 +66,12 @@ export const hindiTranslations = {
   Mathematics: 'गणित',
   'Hindi Stories': 'हिंदी कहानियां',
   'Indian Stories': 'भारतीय कहानियां',
+  Comics: 'कॉमिक्स',
   'Indian Leaders': 'भारतीय नेता',
   'School Maths': 'स्कूल गणित',
   'Hindi reading': 'हिंदी पढ़ाई',
   'Indian stories': 'भारतीय कहानियां',
+  'Indian comics': 'भारतीय कॉमिक्स',
   'Indian leaders': 'भारतीय नेता',
   'School maths': 'स्कूल गणित',
   Hindi: 'हिंदी',

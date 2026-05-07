@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { translateWithLibreTranslate } from '../api/translation'
+import {
+  fetchSupportedLanguages,
+  normalizeLanguageCode,
+  resolveLanguageName,
+  translateWithLibreTranslate,
+} from '../api/translation'
 import { getLocalHindiTranslation } from '../data/hindiTranslations'
 import TranslationContext from './translation-context'
 
@@ -21,6 +26,7 @@ function readStoredLanguage() {
 export function TranslationProvider({ children }) {
   const [language, setLanguage] = useState(readStoredLanguage)
   const [errorMessage, setErrorMessage] = useState('')
+  const [availableLanguages, setAvailableLanguages] = useState([])
 
   useEffect(() => {
     try {
@@ -42,6 +48,24 @@ export function TranslationProvider({ children }) {
     return () => window.clearTimeout(timeoutId)
   }, [errorMessage])
 
+  useEffect(() => {
+    const controller = new AbortController()
+
+    fetchSupportedLanguages({ signal: controller.signal })
+      .then((languages) => {
+        if (!controller.signal.aborted) {
+          setAvailableLanguages(languages)
+        }
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setAvailableLanguages([])
+        }
+      })
+
+    return () => controller.abort()
+  }, [])
+
   const translateText = useCallback(async (text, targetLanguage = language, signal) => {
     if (!text || targetLanguage === 'en') {
       return text
@@ -51,10 +75,6 @@ export function TranslationProvider({ children }) {
 
     if (localTranslation) {
       return localTranslation
-    }
-
-    if (targetLanguage === 'hi') {
-      return text
     }
 
     try {
@@ -76,6 +96,16 @@ export function TranslationProvider({ children }) {
     }
   }, [language])
 
+  const getLanguageLabel = useCallback((languageCode) => {
+    const normalizedCode = normalizeLanguageCode(languageCode)
+
+    if (!normalizedCode) {
+      return ''
+    }
+
+    return resolveLanguageName(availableLanguages, normalizedCode, normalizedCode.toUpperCase())
+  }, [availableLanguages])
+
   const toggleLanguage = useCallback(() => {
     setErrorMessage('')
     setLanguage((currentLanguage) => (currentLanguage === 'en' ? 'hi' : 'en'))
@@ -83,13 +113,15 @@ export function TranslationProvider({ children }) {
 
   const value = useMemo(
     () => ({
+      availableLanguages,
       errorMessage,
+      getLanguageLabel,
       language,
       setLanguage,
       toggleLanguage,
       translateText,
     }),
-    [errorMessage, language, toggleLanguage, translateText],
+    [availableLanguages, errorMessage, getLanguageLabel, language, toggleLanguage, translateText],
   )
 
   return <TranslationContext.Provider value={value}>{children}</TranslationContext.Provider>

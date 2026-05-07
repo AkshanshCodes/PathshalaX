@@ -2,8 +2,10 @@ import { AlertCircle, Languages } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 
 function LanguageToggle() {
-  const { errorMessage, language, toggleLanguage } = useTranslation()
-  const nextLanguageLabel = language === 'en' ? 'Hindi' : 'English'
+  const { errorMessage, getLanguageLabel, language, toggleLanguage } = useTranslation()
+  const nextLanguageCode = language === 'en' ? 'hi' : 'en'
+  const currentLanguageLabel = getLanguageLabel(language) || language.toUpperCase()
+  const nextLanguageLabel = getLanguageLabel(nextLanguageCode) || nextLanguageCode.toUpperCase()
 
   return (
     <div className="hidden sm:block">
@@ -14,7 +16,7 @@ function LanguageToggle() {
         type="button"
       >
         <Languages aria-hidden="true" className="size-4" />
-        {language === 'en' ? 'EN' : 'HI'}
+        <span className="whitespace-nowrap">{currentLanguageLabel}</span>
       </button>
       {errorMessage && language === 'hi' ? (
         <div
